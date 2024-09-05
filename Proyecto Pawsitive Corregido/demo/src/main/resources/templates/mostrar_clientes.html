@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clientes</title>
+    <link rel="stylesheet" href="../css/styles_veterinario.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="../IMG/LOGO PAWSITIVE.png" alt="Pawsitive Care" />
+        <h1 class="text-logo">Pawsitive Care</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="/principal">Inicio</a></li>
+          <li><a href="/Servicios">Servicios</a></li>
+          <li><a href="/nosotros">Acerca de nosotros</a></li>
+          <li><a href="horarios.html">Ubicación & horarios</a></li>
+          <li><a href="peludo/all">Amigos Peludos</a></li>
+          <li><a href="/login" class="selected">Login</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <div class="titulo">
+        <h1>Clientes</h1>
+        <a
+          type="button"
+          href="http://localhost:8090/clientes/agregar?veterinarioId=${veterinarioId}"
+          class="btn btn-primary"
+        >
+          <img src="../images/agregar.png" alt="Add" height="40px" />
+        </a>
+      </div>
+      <table
+        id="tabla"
+        class="table table-striped table-bordered border-primary"
+      >
+        <thead class="table-dark">
+          <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Cédula</th>
+            <th>Celular</th>
+            <th>Correo</th>
+            <th class="botones">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="cliente, stat : ${clientes}">
+            <td th:text="${stat.index + 1}"></td>
+            <td th:text="${cliente.nombre}"></td>
+            <td th:text="${cliente.cedula}"></td>
+            <td th:text="${cliente.celular}"></td>
+            <td th:text="${cliente.email}"></td>
+            <td class="botones">
+              <a
+                class="btn btn-outline-secondary"
+                th:href="@{http://localhost:8090/clientes/modificar/{id}(id=${cliente.id})?veterinarioId=${veterinarioId}}"
+              >
+                <img src="../images/editar.png" alt="Edit" height="40px" />
+              </a>
+              <a
+                class="btn btn-outline-danger"
+                th:href="@{http://localhost:8090/clientes/eliminar/{id}(id=${cliente.id})?veterinarioId=${veterinarioId}}"
+              >
+                <img src="../images/eliminar.png" alt="Delete" height="40px" />
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+
+    <footer>
+      <div class="social-media">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+      <p>&copy; 2024 Pawsitive Care. Todos los derechos reservados.</p>
+    </footer>
+  </body>
+</html>
